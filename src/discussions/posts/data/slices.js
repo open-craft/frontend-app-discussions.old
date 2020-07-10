@@ -3,12 +3,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { LoadingStatus } from '../../../data/constants';
 
 
+function normaliseThreads(rawThreadsData) {
+  const topicThreadMap = {};
+  rawThreadsData.forEach(
+    thread => {
+      if (!topicThreadMap[thread.topic_id]) {
+        topicThreadMap[thread.topic_id] = [];
+      }
+      topicThreadMap[thread.topic_id].push(thread);
+    },
+  );
+  return topicThreadMap;
+}
+
 const courseThreadsSlice = createSlice({
   name: 'courseThreads',
   initialState: {
     status: LoadingStatus.LOADING,
     page: null,
-    threads: [],
+    threads: {
+      // Mapping of topic ids to threads in them
+    },
     totalPages: null,
     totalThreads: null,
   },
@@ -18,7 +33,7 @@ const courseThreadsSlice = createSlice({
     },
     fetchCourseThreadsSuccess: (state, { payload }) => {
       state.status = LoadingStatus.LOADED;
-      state.threads = payload.results;
+      state.threads = normaliseThreads(payload.results);
       state.page = payload.pagination.page;
       state.totalPages = payload.pagination.num_pages;
       state.totalThreads = payload.pagination.count;

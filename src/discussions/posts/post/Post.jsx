@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Routes } from '../../../data/constants';
 import messages from './messages';
 
 
@@ -26,9 +28,16 @@ function Post({ post, intl }) {
             { post.type === 'discussion' && <FontAwesomeIcon icon={faComments} /> }
           </div>
           <div className="d-flex m-1 flex-column">
-            <div className="d-flex post-tile">
+            <Link
+              className="post-title d-flex post-tile"
+              to={
+                Routes.POSTS.PATH.replace(':discussionId', post.topic_id)
+                  .replace(':courseId', post.course_id)
+                  .replace(':threadId', post.id)
+              }
+            >
               { post.title }
-            </div>
+            </Link>
             <div className="d-flex">
               <div className="post-author">
                 { post.author }

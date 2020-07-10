@@ -6,9 +6,7 @@ import Post from './post/Post';
 function PostsView({ posts }) {
   return (
     <div className="discussion-posts d-flex flex-column">
-      { posts.map(
-        post => <Post post={post} />,
-      ) }
+      { posts.map(post => <Post post={post} key={post.id} />) }
     </div>
   );
 }

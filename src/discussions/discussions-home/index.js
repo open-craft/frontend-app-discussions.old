@@ -1,1 +1,1 @@
-export { default as DiscussionsHome } from './DiscussionsHome';
+export { default as DiscussionsHomeContainer } from './DiscussionsHome';

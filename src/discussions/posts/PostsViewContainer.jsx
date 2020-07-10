@@ -7,9 +7,9 @@ import PostsView from './PostsView';
 
 
 function PostsViewContainer() {
-  const { courseId, discussionId, threadId } = useParams();
+  const { courseId, discussionId } = useParams();
   const dispatch = useDispatch();
-  const posts = useSelector(selectCourseThreads);
+  const posts = useSelector(selectCourseThreads(discussionId));
   useEffect(() => {
     // The courseId from the URL is the course we WANT to load.
     dispatch(fetchCourseThreads(courseId));

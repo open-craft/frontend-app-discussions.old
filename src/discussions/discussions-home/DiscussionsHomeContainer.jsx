@@ -1,5 +1,5 @@
 import React from 'react';
-import { DiscussionsHome } from './discussions-home';
+import DiscussionsHome from './DiscussionsHome';
 
 
 export default function DiscussionsHomeContainer() {

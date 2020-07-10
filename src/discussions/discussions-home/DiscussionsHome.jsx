@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { Routes } from '../../data/constants';
+import CommentsViewContainer from '../comments/CommentsViewContainer';
 import { NavigationBar } from '../navigation-bar';
 import PostsViewContainer from '../posts/PostsViewContainer';
 import { TopicsViewContainer } from '../topics';
@@ -19,7 +20,7 @@ export default function DiscussionsHome() {
         <div className="d-flex">
           <Switch>
             <Route path={Routes.POSTS.PATH}>
-              <div className="post-viewer-editor">TODO</div>
+              <CommentsViewContainer />
             </Route>
           </Switch>
         </div>

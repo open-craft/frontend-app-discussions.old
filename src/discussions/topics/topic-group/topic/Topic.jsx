@@ -10,11 +10,6 @@ import { Routes } from '../../../../data/constants';
 
 function Topic({ id, name, topics }) {
   const { courseId } = useParams();
-  console.log(
-    Routes.POSTS.PATH.replace(':discussionId', id)
-      .replace(':courseId', courseId)
-      .replace(':threadId', ''),
-  );
 
   return (
     <div className="discussion-topic d-flex flex-column border-bottom pl-2 pt-1 pb-1" data-topic-id={id}>
