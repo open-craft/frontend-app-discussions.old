@@ -1,13 +1,16 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { LoadingStatus } from '../constants';
+import { LoadingStatus } from '../../../data/constants';
 
 
-const courseTopicsSlice = createSlice({
+const topicsSLice = createSlice({
   name: 'courseTopics',
   initialState: {
     status: LoadingStatus.LOADING,
-    topics: {},
+    topics: {
+      courseware_topics: [],
+      non_courseware_topics: [],
+    },
   },
   reducers: {
     fetchCourseTopicsRequest: (state) => {
@@ -30,6 +33,6 @@ export const {
   fetchCourseTopicsRequest,
   fetchCourseTopicsSuccess,
   fetchCourseTopicsFailed,
-} = courseTopicsSlice.actions;
+} = topicsSLice.actions;
 
-export const courseTopicsReducer = courseTopicsSlice.reducer;
+export const topicsReducer = topicsSLice.reducer;

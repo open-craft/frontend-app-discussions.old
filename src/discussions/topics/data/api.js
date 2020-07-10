@@ -1,8 +1,7 @@
 /* eslint-disable import/prefer-default-export */
-import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { API_BASE_URL } from '../../../data/constants';
 
-const API_BASE_URL = getConfig().LMS_BASE_URL;
 
 function getDiscussionAPIUrl(name, courseId, ...params) {
   const path = {
@@ -44,41 +43,9 @@ function getDiscussionAPIUrl(name, courseId, ...params) {
     notifications_status: '/notification_prefs/status/',
     general_metadata: `/api/discussion/v1/courses/${courseId}`,
   }[name];
-  return new URL(`${getConfig().LMS_BASE_URL}${path}`);
+  return new URL(`${API_BASE_URL}${path}`);
 }
 
-
-export async function getCourseThreads(
-  courseId, {
-    page, pageSize, topicIds, textSearch, orderBy, following, view, requestedFields,
-  } = {},
-) {
-  const url = new URL(`${API_BASE_URL}/api/discussion/v1/threads/`);
-  const paramsMap = {
-    page,
-    page_size: pageSize,
-    topic_id: topicIds.join(','),
-    text_search: textSearch,
-    order_by: orderBy,
-    following,
-    view,
-    requested_fields: requestedFields,
-  };
-  url.searchParams.append('course_id', courseId);
-  Object.keys(paramsMap)
-    .forEach(
-      (param) => {
-        const paramValue = paramsMap[param];
-        if (paramValue) {
-          url.searchParams.append(param, paramValue);
-        }
-      },
-    );
-
-  const { data } = await getAuthenticatedHttpClient()
-    .get(url);
-  return data;
-}
 
 export async function getCourseTopics(courseId, topicIds) {
   const url = new URL(`${API_BASE_URL}/api/discussion/v1/course_topics/${courseId}`);
@@ -88,15 +55,4 @@ export async function getCourseTopics(courseId, topicIds) {
   const { data } = await getAuthenticatedHttpClient()
     .get(url);
   return data;
-}
-
-export function aa(m) {
-  getCourseThreads('course-v1:edX+DemoX+Demo_Course')
-    .then(
-      x => console.log(x)
-    );
-  getCourseTopics('course-v1:edX+DemoX+Demo_Course')
-    .then(
-      x => console.log(x)
-    );
 }

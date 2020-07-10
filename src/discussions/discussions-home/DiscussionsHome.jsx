@@ -1,11 +1,28 @@
 import React from 'react';
-import { SearchFilterBar } from '../search-filter-bar';
+import { Route, Switch } from 'react-router';
+import { Routes } from '../../data/constants';
+import { NavigationBar } from '../navigation-bar';
+import PostsViewContainer from '../posts/PostsViewContainer';
+import { TopicsViewContainer } from '../topics';
 
 export default function DiscussionsHome() {
   return (
     <main>
-      <div className="container-fluid">
-        <SearchFilterBar />
+      <div className="d-flex flex-row">
+        <div className="d-flex flex-column border">
+          <NavigationBar />
+          <Switch>
+            <Route path={Routes.POSTS.PATH} component={PostsViewContainer} />
+            <Route path={Routes.TOPICS.PATH} component={TopicsViewContainer} />
+          </Switch>
+        </div>
+        <div className="d-flex">
+          <Switch>
+            <Route path={Routes.POSTS.PATH}>
+              <div className="post-viewer-editor">TODO</div>
+            </Route>
+          </Switch>
+        </div>
       </div>
     </main>
   );

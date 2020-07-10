@@ -1,6 +1,6 @@
 import { logError } from '@edx/frontend-platform/logging';
 import { getCourseTopics } from './api';
-import { fetchCourseTopicsRequest, fetchCourseTopicsSuccess, fetchCourseTopicsFailed } from './slices/course_topics';
+import { fetchCourseTopicsFailed, fetchCourseTopicsRequest, fetchCourseTopicsSuccess } from './slices';
 
 export function fetchCourseTopics(courseId) {
   return async (dispatch) => {

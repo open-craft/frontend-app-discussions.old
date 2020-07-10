@@ -1,3 +1,7 @@
+import { getConfig } from '@edx/frontend-platform';
+
+export const API_BASE_URL = getConfig().LMS_BASE_URL;
+
 export const LoadingStatus = {
   LOADING: 'loading',
   LOADED: 'loaded',
@@ -6,9 +10,9 @@ export const LoadingStatus = {
 };
 
 export const ThreadOrdering = {
-  BY_LAST_ACTIVITY: 'last_activity_at',
-  BY_COMMENT_COUNT: 'comment_count',
-  BY_VOTE_COUNT: 'vote_count',
+  BY_LAST_ACTIVITY: 'sort_by_last_activity',
+  BY_COMMENT_COUNT: 'sort_by_comment_count',
+  BY_VOTE_COUNT: 'sort_by_vote_count',
 };
 
 export const ThreadView = {
@@ -31,6 +35,16 @@ export const AllPostsFilter = {
 
 export const TopicsFilter = {
   ALL: 'all_topics',
-  COURSEWARE: 'course_section_topics',
-  NON_COURSEWARE: 'general_topics',
+  COURSE_SECTION: 'course_section_topics',
+  GENERAL: 'general_topics',
+};
+
+
+export const Routes = {
+  TOPICS: {
+    PATH: '/courses/:courseId/discussion/forum',
+  },
+  POSTS: {
+    PATH: '/courses/:courseId/discussion/forum/:discussionId/threads/:threadId?',
+  },
 };

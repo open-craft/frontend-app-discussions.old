@@ -34,6 +34,7 @@ subscribe(APP_INIT_ERROR, (error) => {
 });
 
 initialize({
+  requireAuthenticatedUser: true,
   messages: [
     appMessages,
     headerMessages,

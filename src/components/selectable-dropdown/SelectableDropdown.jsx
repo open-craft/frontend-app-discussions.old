@@ -6,19 +6,20 @@ import React, { useState } from 'react';
 function SelectableDropdown({
   options, defaultOption, onChange, label,
 }) {
-  const [selected, setSelected] = useState(defaultOption);
+  const [selected, setSelected] = useState(options.find(option => (option.value === defaultOption)));
   return (
     <Dropdown>
       <Dropdown.Button>
-        { label || options[selected] }
+        { label || selected.label }
       </Dropdown.Button>
       <Consumer>
         { ({ toggle }) => (
           <Dropdown.Menu>
-            { Object.keys(options)
+            { options
               .map(option => (
                 <Dropdown.Item
                   type="button"
+                  key={option.value}
                   onClick={
                     () => {
                       setSelected(option);
@@ -29,7 +30,7 @@ function SelectableDropdown({
                     }
                   }
                 >
-                  { options[option] }
+                  { option.label }
                 </Dropdown.Item>
               )) }
           </Dropdown.Menu>
@@ -40,7 +41,12 @@ function SelectableDropdown({
 }
 
 SelectableDropdown.propTypes = {
-  options: PropTypes.objectOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      label: PropTypes.string,
+    }),
+  ).isRequired,
   defaultOption: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   label: PropTypes.node,
